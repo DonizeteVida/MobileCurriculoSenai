@@ -1,7 +1,9 @@
 package vida.donizete.com.br.mobilecurriculosenai.utils;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -28,5 +30,21 @@ public class BaseActivity extends AppCompatActivity {
                     .build();
         }
         return retrofit;
+    }
+
+    public void longMens(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+    }
+
+    public void shortMens(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    public void longMensSnack(String s) {
+        Snackbar.make(findViewById(android.R.id.content), s, Snackbar.LENGTH_LONG).show();
+    }
+
+    public void shortMensSnack(String s) {
+        Snackbar.make(findViewById(android.R.id.content), s, Snackbar.LENGTH_SHORT).show();
     }
 }

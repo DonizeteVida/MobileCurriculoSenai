@@ -37,21 +37,12 @@ public class Usuario {
     private Integer nivel_ingles;
     private Integer nivel_espanhol;
 
-
     public ClasseGenerica getCategoria() {
         return categoria;
     }
 
     public void setCategoria(ClasseGenerica categoria) {
         this.categoria = categoria;
-    }
-
-    public Long getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Long idade) {
-        this.idade = idade;
     }
 
     public ClasseGenerica getEstado() {

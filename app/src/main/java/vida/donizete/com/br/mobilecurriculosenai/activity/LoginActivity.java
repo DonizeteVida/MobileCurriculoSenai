@@ -1,9 +1,10 @@
-package vida.donizete.com.br.mobilecurriculosenai;
+package vida.donizete.com.br.mobilecurriculosenai.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
+import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -12,63 +13,67 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import vida.donizete.com.br.mobilecurriculosenai.R;
 import vida.donizete.com.br.mobilecurriculosenai.entities.Usuario;
 import vida.donizete.com.br.mobilecurriculosenai.service.UsuarioService;
 import vida.donizete.com.br.mobilecurriculosenai.utils.BaseActivity;
 import vida.donizete.com.br.mobilecurriculosenai.utils.StringToMD5;
 
-public class MainActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity {
 
     Retrofit retrofit;
 
     @BindView(R.id.editText1)
-    EditText cpfDigitado;
+    EditText editTextCpf;
 
     @BindView(R.id.editText2)
-    EditText passDigitado;
+    EditText editTextPass;
+
+    @BindView(R.id.progressBar2)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
         setUpToolbar();
 
         retrofit = retrofitGetInstance();
-
     }
 
     @OnClick(R.id.buttonLogin)
-    public void login() {
+    public void doLogin() {
 
-        String cpf = cpfDigitado.getText().toString().trim();
-        final String pass = StringToMD5.convertStringToMd5(passDigitado.getText().toString().trim());
+        progressBar.setVisibility(View.VISIBLE);
 
-        retrofit.create(UsuarioService.class).getUsuario(cpf).enqueue(new Callback<Usuario>() {
+        String cpf = editTextCpf.getText().toString().trim();
+        final String pass = StringToMD5.convertStringToMd5(editTextPass.getText().toString().trim());
 
+
+        UsuarioService usuarioService = retrofit.create(UsuarioService.class);
+
+        Call<Usuario> usuarioCall = usuarioService.getUsuario(cpf);
+
+        usuarioCall.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.isSuccessful()) {
                     Usuario usuario = response.body();
-
                     if (usuario.getSenha().equals(pass)) {
-                        mens("Sucesso, senhas iguais ! \n Bem vindo, " + usuario.getNome());
-                    } else {
-                        mens("Usuario e/ou senha incorretos !");
+                        longMens("Sucesso, senhas iguais !");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                mens("Falha ao conectar ao serviço: " + t.toString());
+                longMens("Falha ao conectar ao serviço: " + t.toString());
             }
         });
+
     }
 
-    private void mens(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
-    }
 
 }
