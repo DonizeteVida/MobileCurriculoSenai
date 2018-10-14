@@ -1,8 +1,12 @@
 package vida.donizete.com.br.mobilecurriculosenai.utils;
 
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import retrofit2.Retrofit;
@@ -30,6 +34,27 @@ public class BaseActivity extends AppCompatActivity {
                     .build();
         }
         return retrofit;
+    }
+
+    protected void setUpMenu() {
+        ActionBar bar = getSupportActionBar();
+
+        if (bar != null) {
+            bar.setDisplayHomeAsUpEnabled(true);
+            bar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void longMens(String s) {

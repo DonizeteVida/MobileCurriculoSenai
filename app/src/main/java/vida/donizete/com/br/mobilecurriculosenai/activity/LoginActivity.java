@@ -1,7 +1,9 @@
 package vida.donizete.com.br.mobilecurriculosenai.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -17,6 +19,7 @@ import vida.donizete.com.br.mobilecurriculosenai.R;
 import vida.donizete.com.br.mobilecurriculosenai.entities.Usuario;
 import vida.donizete.com.br.mobilecurriculosenai.service.UsuarioService;
 import vida.donizete.com.br.mobilecurriculosenai.utils.BaseActivity;
+import vida.donizete.com.br.mobilecurriculosenai.utils.Perfil;
 import vida.donizete.com.br.mobilecurriculosenai.utils.StringToMD5;
 
 public class LoginActivity extends BaseActivity {
@@ -49,7 +52,6 @@ public class LoginActivity extends BaseActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         String cpf = editTextCpf.getText().toString().trim();
-        final String pass = StringToMD5.convertStringToMd5(editTextPass.getText().toString().trim());
 
 
         UsuarioService usuarioService = retrofit.create(UsuarioService.class);
@@ -59,17 +61,29 @@ public class LoginActivity extends BaseActivity {
         usuarioCall.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
                 if (response.isSuccessful()) {
+                    String pass = StringToMD5.convertStringToMd5(editTextPass.getText().toString().trim());
                     Usuario usuario = response.body();
-                    if (usuario.getSenha().equals(pass)) {
-                        longMens("Sucesso, senhas iguais !");
+                    if (usuario != null) {
+                        if (usuario.getSenha().equals(pass)) {
+                            longMens("Sucesso, senhas iguais !");
+                            Perfil.setUsuario(usuario);
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+                        } else {
+                            longMens("Falha ao logar: usuario e/ou senha incorretos !");
+                        }
                     }
                 }
+
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
                 longMens("Falha ao conectar ao serviço: " + t.toString());
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
 
