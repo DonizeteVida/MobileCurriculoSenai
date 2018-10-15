@@ -2,7 +2,9 @@ package vida.donizete.com.br.mobilecurriculosenai.entities;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ClasseGenerica {
+import java.io.Serializable;
+
+public class ClasseGenerica implements Serializable {
 
 
 	public ClasseGenerica() {

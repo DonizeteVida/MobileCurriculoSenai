@@ -3,10 +3,11 @@ package vida.donizete.com.br.mobilecurriculosenai.entities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     public Usuario() {
         status = new ClasseGenerica();

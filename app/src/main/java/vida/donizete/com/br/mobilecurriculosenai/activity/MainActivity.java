@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity implements CurriculoCallback {
         Intent i = new Intent(this, InformacaoSolicitada.class);
         i.putExtra("info", 1);
         i.putExtra("curriculo", c);
+        startActivity(i);
     }
 
     @Override
@@ -87,5 +88,6 @@ public class MainActivity extends BaseActivity implements CurriculoCallback {
         Intent i = new Intent(this, InformacaoSolicitada.class);
         i.putExtra("info", 2);
         i.putExtra("curriculo", c);
+        startActivity(i);
     }
 }
