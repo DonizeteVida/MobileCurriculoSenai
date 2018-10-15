@@ -1,9 +1,9 @@
 package vida.donizete.com.br.mobilecurriculosenai.entities;
 
-import java.util.Calendar;
+import java.io.Serializable;
 
 
-public class CurriculumVitae {
+public class CurriculumVitae implements Serializable {
 
     public CurriculumVitae() {
         curso = new ClasseGenerica();

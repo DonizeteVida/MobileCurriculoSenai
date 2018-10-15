@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -14,16 +15,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vida.donizete.com.br.mobilecurriculosenai.R;
+import vida.donizete.com.br.mobilecurriculosenai.callback.CurriculoCallback;
 import vida.donizete.com.br.mobilecurriculosenai.entities.CurriculumVitae;
 
 public class CurriculumVitaeAdapter extends RecyclerView.Adapter<CurriculumVitaeAdapter.CurriculumVitaeHolder> {
 
     Context context;
     List<CurriculumVitae> curriculumVitaeList;
+    CurriculoCallback curriculoCallback;
 
-    public CurriculumVitaeAdapter(Context context, List<CurriculumVitae> curriculumVitaeList) {
+    public CurriculumVitaeAdapter(Context context, List<CurriculumVitae> curriculumVitaeList, CurriculoCallback curriculoCallback) {
         this.context = context;
         this.curriculumVitaeList = curriculumVitaeList;
+        this.curriculoCallback = curriculoCallback;
     }
 
     @NonNull
@@ -35,10 +39,22 @@ public class CurriculumVitaeAdapter extends RecyclerView.Adapter<CurriculumVitae
 
     @Override
     public void onBindViewHolder(@NonNull CurriculumVitaeHolder holder, int position) {
-        CurriculumVitae c = curriculumVitaeList.get(position);
+        final CurriculumVitae c = curriculumVitaeList.get(position);
 
         holder.ano_curriculo.setText(c.getTurma().getNome());
         holder.nome_curso.setText(c.getCurso().getNome());
+        holder.know_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                curriculoCallback.verFormacao(c);
+            }
+        });
+        holder.experience_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                curriculoCallback.verExperiencia(c);
+            }
+        });
     }
 
     @Override
@@ -53,6 +69,12 @@ public class CurriculumVitaeAdapter extends RecyclerView.Adapter<CurriculumVitae
 
         @BindView(R.id.ano_curriculo)
         TextView ano_curriculo;
+
+        @BindView(R.id.know_icon)
+        ImageView know_icon;
+
+        @BindView(R.id.experience_icon)
+        ImageView experience_icon;
 
         public CurriculumVitaeHolder(View itemView) {
             super(itemView);

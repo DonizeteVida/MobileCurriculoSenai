@@ -1,6 +1,7 @@
 package vida.donizete.com.br.mobilecurriculosenai.activity;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +23,7 @@ import vida.donizete.com.br.mobilecurriculosenai.utils.BaseActivity;
 import vida.donizete.com.br.mobilecurriculosenai.utils.Perfil;
 import vida.donizete.com.br.mobilecurriculosenai.utils.StringToMD5;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity{
 
     Retrofit retrofit;
 
@@ -67,17 +68,15 @@ public class LoginActivity extends BaseActivity {
                     Usuario usuario = response.body();
                     if (usuario != null) {
                         if (usuario.getSenha().equals(pass)) {
-                            longMens("Sucesso, senhas iguais !");
                             Perfil.setUsuario(usuario);
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(i);
-                        } else {
-                            longMens("Falha ao logar: usuario e/ou senha incorretos !");
+
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     }
                 }
 
-                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
