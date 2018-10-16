@@ -14,9 +14,9 @@ public interface CurriculoService {
     @GET("curriculumvitae/{idUser}/busca")
     Call<List<CurriculumVitae>> getCurriculumVitae(@Path("idUser") Integer id);
 
-    @GET("{idCurriculo}/experiencia/busca")
+    @GET("curriculumvitae/{idCurriculo}/experiencia/busca")
     Call<List<Experiencia>> getExperiencias(@Path("idCurriculo") Integer idCurriculo);
 
-    @GET("{idCurriculo}/formacao/busca")
+    @GET("curriculumvitae/{idCurriculo}/formacao/busca")
     Call<List<Formacao>> getFormacoes(@Path("idCurriculo") Integer idCurriculo);
 }

@@ -77,16 +77,17 @@ public class MainActivity extends BaseActivity implements CurriculoCallback {
 
     @Override
     public void verExperiencia(CurriculumVitae c) {
-        Intent i = new Intent(this, InformacaoSolicitada.class);
-        i.putExtra("info", 1);
-        i.putExtra("curriculo", c);
-        startActivity(i);
+        startActivity(0, c);
     }
 
     @Override
     public void verFormacao(CurriculumVitae c) {
+        startActivity(1, c);
+    }
+
+    public void startActivity(Integer integer, CurriculumVitae c) {
         Intent i = new Intent(this, InformacaoSolicitada.class);
-        i.putExtra("info", 2);
+        i.putExtra("info", integer);
         i.putExtra("curriculo", c);
         startActivity(i);
     }
