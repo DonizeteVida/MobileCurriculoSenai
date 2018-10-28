@@ -1,5 +1,7 @@
 package vida.donizete.com.br.mobilecurriculosenai.service;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -9,11 +11,9 @@ import vida.donizete.com.br.mobilecurriculosenai.entities.Usuario;
 
 public interface UsuarioService {
 
-    public static String BASE_URL = "http://10.0.2.2:8080/MOBILE_API-MAVEN-SCCV/ws/";
+    String BASE_URL = "http://10.0.2.2:8080/MOBILE_API-MAVEN-SCCV/ws/";
 
     @GET("usuario/{cpf}/busca")
     Call<Usuario> getUsuario(@Path("cpf") String cpf);
 
-    @POST("usuario/update")
-    Call<Boolean> updateUsuario(@Body Usuario usuario);
 }

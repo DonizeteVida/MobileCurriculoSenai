@@ -23,7 +23,7 @@ import vida.donizete.com.br.mobilecurriculosenai.utils.BaseActivity;
 import vida.donizete.com.br.mobilecurriculosenai.utils.Perfil;
 import vida.donizete.com.br.mobilecurriculosenai.utils.StringToMD5;
 
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends BaseActivity {
 
     Retrofit retrofit;
 
@@ -73,7 +73,13 @@ public class LoginActivity extends BaseActivity{
                             startActivity(i);
 
                             progressBar.setVisibility(View.INVISIBLE);
+                        } else {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            longMens("Senha incorreta !");
                         }
+                    }else{
+                        longMens("Usuario inexistente !");
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 }
 
