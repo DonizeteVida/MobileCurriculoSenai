@@ -19,7 +19,7 @@ public class BaseActivity extends AppCompatActivity {
     public static Retrofit retrofit;
 
     protected void setUpToolbar() {
-        Toolbar t = findViewById(R.id.include_toolbar);
+        Toolbar t = (Toolbar) findViewById(R.id.include_toolbar);
 
         if (t != null) {
             setSupportActionBar(t);
@@ -47,7 +47,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         switch (item.getItemId()) {
             case android.R.id.home:
