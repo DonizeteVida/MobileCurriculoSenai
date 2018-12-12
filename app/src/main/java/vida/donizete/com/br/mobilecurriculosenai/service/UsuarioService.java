@@ -11,7 +11,7 @@ import vida.donizete.com.br.mobilecurriculosenai.entities.Usuario;
 
 public interface UsuarioService {
 
-    String BASE_URL = "http://10.0.2.2:8080/MOBILE_API-MAVEN-SCCV/ws/";
+    String BASE_URL = "http://10.87.210.5/MOBILE_API-MAVEN-SCCV/ws/";
 
     @GET("usuario/{cpf}/busca")
     Call<Usuario> getUsuario(@Path("cpf") String cpf);
