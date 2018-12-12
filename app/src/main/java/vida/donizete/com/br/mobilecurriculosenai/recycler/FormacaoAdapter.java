@@ -41,7 +41,7 @@ public class FormacaoAdapter extends RecyclerView.Adapter<FormacaoAdapter.Formac
 
         holder.nome_formacao.setText(form.getNome());
         holder.text_date_inicio_formacao.setText(sdf.format(form.getData_inicio()));
-        holder.text_date_fim_formacao.setText(sdf.format(form.getData_fim()));
+        holder.text_date_fim_formacao.setText(form.getData_fim() == 0 ? "Atualmente" : sdf.format(form.getData_fim()));
         holder.text_escola.setText(form.getEscola());
     }
 

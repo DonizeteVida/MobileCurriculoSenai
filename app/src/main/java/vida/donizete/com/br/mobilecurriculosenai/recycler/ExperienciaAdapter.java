@@ -45,7 +45,7 @@ public class ExperienciaAdapter extends RecyclerView.Adapter<ExperienciaAdapter.
 
         holder.nome_experiencia.setText(exp.getNome());
         holder.edit_data_inicio.setText(sdf.format(exp.getData_inicio()));
-        holder.edit_data_fim.setText(sdf.format(exp.getData_fim()));
+        holder.edit_data_fim.setText(exp.getData_fim() == 0 ? "Atualmente" : sdf.format(exp.getData_fim()));
         holder.edit_cargo.setText(exp.getCargo());
         holder.edit_empresa.setText(exp.getEmpresa());
         holder.edit_funcoes.setText(exp.getFuncoes());
